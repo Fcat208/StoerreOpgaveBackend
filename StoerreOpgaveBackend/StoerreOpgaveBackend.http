@@ -1,0 +1,6 @@
+@StoerreOpgaveBackend_HostAddress = http://localhost:5072
+
+GET {{StoerreOpgaveBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
