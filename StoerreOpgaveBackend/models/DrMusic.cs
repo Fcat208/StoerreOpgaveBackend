@@ -2,10 +2,10 @@
 {
     public class DrMusic
     {
-        string title { get; set; }
-        string artist { get; set; }
+        public string title { get; set; }
+        public string artist { get; set; }
         public int duration { get; set; }
-        public string publicationDate { get; set; }
+        public string? publicationDate { get; set; }
 
 
 
