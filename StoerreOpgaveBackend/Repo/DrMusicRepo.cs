@@ -10,7 +10,8 @@ namespace StoerreOpgaveBackend.Repo
             {
             var music = new DrMusic
             {
-                Id = nextId++,
+                //vi laver det på denne måde, fordi hvis der er flere brugere der prøver at oprette en musik på samme tid, så vil de få forskellige Id'er, og ikke det samme, fordi Interlocked.Increment er trådsikker.
+                Id = Interlocked.Increment(ref nextId),
                 title = Title,
                 artist = Artist,
                 duration = Duration,
@@ -21,7 +22,8 @@ namespace StoerreOpgaveBackend.Repo
         }
         public List<DrMusic> GetAll()
         {
-            return musics;
+            //return musics, dette er også en metode, men vi bruger den nedenunder så vi sender en kopi af den rigtige liste, og ikke den rigtige. Det gør vi af sikkerhedsårsager.;
+            return new List<DrMusic>(musics);
         }
         public DrMusic? GetById(int id)
         {
