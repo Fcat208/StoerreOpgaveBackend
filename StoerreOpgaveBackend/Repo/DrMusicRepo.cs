@@ -28,6 +28,19 @@ namespace StoerreOpgaveBackend.Repo
             return new List<DrMusic>(musics);
         }
 
+        public List<DrMusic> Search(string? title, string? artist)
+        {
+            var result = new List<DrMusic>(musics);
+
+            if (!string.IsNullOrEmpty(title))
+                result = result.Where(m => m.title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            if (!string.IsNullOrEmpty(artist))
+                result = result.Where(m => m.artist.Contains(artist, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return result;
+        }
+
         public DrMusic? GetById(int id)
         {
             return musics.FirstOrDefault(m => m.Id == id);
