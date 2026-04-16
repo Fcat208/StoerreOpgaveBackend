@@ -18,9 +18,9 @@ namespace Repotest
         public void testGetAll()
         {
             // Arrange
-            repo.Add("Song1", 0, "Artist1", 200, 2000);
-            repo.Add("Song2", 0, "Artist2", 300, 2010);
-            repo.Add("Song3", 0, "Artist3", 250, 2020);
+            repo.Add("Song1", "Artist1", 200, 2000);
+            repo.Add("Song2", "Artist2", 300, 2010);
+            repo.Add("Song3", "Artist3", 250, 2020);
 
             // Act
             List<DrMusic> all = repo.GetAll();
@@ -35,7 +35,7 @@ namespace Repotest
         public void testGetById()
         {
             // Arrange
-            DrMusic song = repo.Add("Song1", 0, "Artist1", 200, 2000);
+            DrMusic song = repo.Add("Song1", "Artist1", 200, 2000);
             // Act
             DrMusic? result = repo.GetById(song.Id);
             // Assert
@@ -46,7 +46,7 @@ namespace Repotest
         public void testDelete()
         {
             // Arrange
-            DrMusic song = repo.Add("Song1", 0, "Artist1", 200, 2000);
+            DrMusic song = repo.Add("Song1", "Artist1", 200, 2000);
             // Act
             bool deleted = repo.Delete(song.Id);
             DrMusic? result = repo.GetById(song.Id);
@@ -59,7 +59,7 @@ namespace Repotest
         public void testUpdate()
         {
             // Arrange
-            DrMusic song = repo.Add("Song1", 0, "Artist1", 200, 2023);
+            DrMusic song = repo.Add("Song1", "Artist1", 200, 2023);
 
             // Act
             repo.Update(song.Id, "UpdatedSong", "UpdatedArtist", 210, 2024);
