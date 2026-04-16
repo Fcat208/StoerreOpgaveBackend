@@ -13,8 +13,7 @@ namespace StoerreOpgaveBackend.Repo
             musics.Add(new DrMusic { Id = nextId++, title = "Billie Jean", artist = "Michael Jackson", duration = 294, publicationDate = 1983 });
             musics.Add(new DrMusic { Id = nextId++, title = "Smells Like Teen Spirit", artist = "Nirvana", duration = 301, publicationDate = 1991 });
         }
-        public DrMusic Add(string Title, int Id, string Artist, int Duration, int PublicationDate)
-            {
+        
         public DrMusic Add(string Title, string Artist, int Duration, int PublicationDate)
         {
             var music = new DrMusic
