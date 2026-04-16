@@ -7,6 +7,13 @@ namespace StoerreOpgaveBackend.Repo
         private readonly List<DrMusic> musics = new();
         private int nextId = 1;
 
+        public DrMusicRepo()
+        {
+            musics.Add(new DrMusic { Id = nextId++, title = "Bohemian Rhapsody", artist = "Queen", duration = 354, publicationDate = 1975 });
+            musics.Add(new DrMusic { Id = nextId++, title = "Billie Jean", artist = "Michael Jackson", duration = 294, publicationDate = 1983 });
+            musics.Add(new DrMusic { Id = nextId++, title = "Smells Like Teen Spirit", artist = "Nirvana", duration = 301, publicationDate = 1991 });
+        }
+        
         public DrMusic Add(string Title, string Artist, int Duration, int PublicationDate)
         {
             var music = new DrMusic
