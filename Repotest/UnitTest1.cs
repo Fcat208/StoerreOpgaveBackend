@@ -14,8 +14,8 @@ namespace Repotest
         }
 
         [Fact]
-       
-             public void testGetAll()
+
+        public void testGetAll()
         {
             // Arrange
             repo.Add("Song1", 0, "Artist1", 200, 2000);
@@ -31,6 +31,48 @@ namespace Repotest
             Assert.Contains(all, m => m.title == "Song2");
             Assert.Contains(all, m => m.title == "Song3");
         }
+        [Fact]
+        public void testGetById()
+        {
+            // Arrange
+            DrMusic song = repo.Add("Song1", 0, "Artist1", 200, 2000);
+            // Act
+            DrMusic? result = repo.GetById(song.Id);
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(song.Id, result?.Id);
+        }
+        [Fact]
+        public void testDelete()
+        {
+            // Arrange
+            DrMusic song = repo.Add("Song1", 0, "Artist1", 200, 2000);
+            // Act
+            bool deleted = repo.Delete(song.Id);
+            DrMusic? result = repo.GetById(song.Id);
+            // Assert
+            Assert.True(deleted);
+            Assert.Null(result);
+
+        }
+        [Fact]
+        public void testUpdate()
+        {
+            // Arrange
+            DrMusic song = repo.Add("Song1", 0, "Artist1", 200, 2023);
+
+            // Act
+            repo.Update(song.Id, "UpdatedSong", "UpdatedArtist", 210, 2024);
+            DrMusic? result = repo.GetById(song.Id);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("UpdatedSong", result?.title);
+            Assert.Equal("UpdatedArtist", result?.artist);
+            Assert.Equal(210, result?.duration);
+            Assert.Equal(2024, result?.publicationDate);
+        }
+
     }
 }
 
