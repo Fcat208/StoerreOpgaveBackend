@@ -55,6 +55,26 @@ namespace Repotest
             Assert.Null(result);
 
         }
+
+        [Fact]
+        public void testGetById_NotFound()
+        {
+            // Act
+            DrMusic? result = repo.GetById(999);
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void testDelete_NotFound()
+        {
+            // Act
+            bool deleted = repo.Delete(999);
+
+            // Assert
+            Assert.False(deleted);
+        }
         [Fact]
         public void testUpdate()
         {
