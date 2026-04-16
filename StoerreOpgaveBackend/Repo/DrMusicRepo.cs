@@ -7,6 +7,13 @@ namespace StoerreOpgaveBackend.Repo
         private readonly List<DrMusic> musics = new();
         private int nextId = 1;
 
+        public DrMusicRepo()
+        {
+            musics.Add(new DrMusic { Id = nextId++, title = "Bohemian Rhapsody", artist = "Queen", duration = 354, publicationDate = 1975 });
+            musics.Add(new DrMusic { Id = nextId++, title = "Billie Jean", artist = "Michael Jackson", duration = 294, publicationDate = 1983 });
+            musics.Add(new DrMusic { Id = nextId++, title = "Smells Like Teen Spirit", artist = "Nirvana", duration = 301, publicationDate = 1991 });
+        }
+        
         public DrMusic Add(string Title, string Artist, int Duration, int PublicationDate)
         {
             var music = new DrMusic
@@ -26,6 +33,19 @@ namespace StoerreOpgaveBackend.Repo
         {
             //return musics, dette er også en metode, men vi bruger den nedenunder så vi sender en kopi af den rigtige liste, og ikke den rigtige. Det gør vi af sikkerhedsårsager.
             return new List<DrMusic>(musics);
+        }
+
+        public List<DrMusic> Search(string? title, string? artist)
+        {
+            var result = new List<DrMusic>(musics);
+
+            if (!string.IsNullOrEmpty(title))
+                result = result.Where(m => m.title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            if (!string.IsNullOrEmpty(artist))
+                result = result.Where(m => m.artist.Contains(artist, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return result;
         }
 
         public DrMusic? GetById(int id)
