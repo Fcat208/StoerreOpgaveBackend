@@ -36,10 +36,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    if (builder.Environment.IsDevelopment())
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-    else
-        options.UseSqlite("Data Source=drmusic.db");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddScoped<dbDrMusicRepo>();
