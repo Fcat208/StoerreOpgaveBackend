@@ -35,7 +35,12 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    if (builder.Environment.IsDevelopment())
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    else
+        options.UseSqlite("Data Source=drmusic.db");
+});
 
 builder.Services.AddScoped<dbDrMusicRepo>();
 
@@ -70,6 +75,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
 }
 
 app.UseCors("AllowAll");
