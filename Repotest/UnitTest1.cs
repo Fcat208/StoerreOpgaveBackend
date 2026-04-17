@@ -14,7 +14,6 @@ namespace Repotest
         }
 
         [Fact]
-
         public void testGetAll()
         {
             // Arrange
@@ -25,8 +24,8 @@ namespace Repotest
             // Act
             List<DrMusic> all = repo.GetAll();
 
-            // Assert
-            Assert.Equal(3, all.Count);
+            // Assert - konstruktøren tilføjer 3 sange, testen tilføjer 3 mere = 6 i alt
+            Assert.Equal(6, all.Count);
             Assert.Contains(all, m => m.title == "Song1");
             Assert.Contains(all, m => m.title == "Song2");
             Assert.Contains(all, m => m.title == "Song3");

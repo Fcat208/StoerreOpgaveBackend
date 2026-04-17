@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StoerreOpgaveBackend.Repo;
 using StoerreOpgaveBackend.models;
@@ -17,12 +18,9 @@ namespace StoerreOpgaveBackend.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<DrMusic>> GetAll([FromQuery] string? title, [FromQuery] string? artist)
         {
             List<DrMusic> musics = _repo.Search(title, artist);
-            if (musics == null || musics.Count == 0)
-                return NotFound("No music records found");
             return Ok(musics);
         }
 
@@ -37,6 +35,7 @@ namespace StoerreOpgaveBackend.Controllers
             return Ok(music);
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -48,6 +47,7 @@ namespace StoerreOpgaveBackend.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -62,6 +62,7 @@ namespace StoerreOpgaveBackend.Controllers
             return Ok(updated);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
