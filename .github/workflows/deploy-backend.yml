@@ -16,10 +16,10 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Restore
-        run: dotnet restore StoerreOpgaveBackend/StoerreOpgaveBackend.csproj
+        run: dotnet restore StoerreOpgaveBackend.sln
 
       - name: Build
-        run: dotnet build StoerreOpgaveBackend/StoerreOpgaveBackend.csproj --no-restore -c Release
+        run: dotnet build StoerreOpgaveBackend.sln --no-restore -c Release
 
       - name: Test
         run: dotnet test Repotest/Repotest.csproj --no-build -c Release
